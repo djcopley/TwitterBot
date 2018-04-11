@@ -1,7 +1,7 @@
 # TwitterBot
 A simple program that replies to tweets. Response is generated using the CleverBot API.
 
-#Usage
+# Usage
 Create a credentials.py file and paste in the following.:
 
     class Twitter:
