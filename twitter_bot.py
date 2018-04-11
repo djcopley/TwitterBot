@@ -1,5 +1,6 @@
 """
 The goal of version 2.0 is to reply directly to threads where you are mentioned.
+TODO - Add logging; Reply directly to tweets
 """
 import twitter
 import re
