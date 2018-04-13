@@ -1,9 +1,14 @@
 """
 Code by Daniel Copley
 Source @ GitHub.com/djcopley
+
+The goal of version 2.0 is to reply directly to threads where you are mentioned.
+TODO - Add logging and argparse; Reply directly to tweets
 """
 import twitter
 import re
+import argparse
+import logging
 from cleverwrap import CleverWrap
 from credentials import Twitter, CleverBot
 
