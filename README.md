@@ -9,6 +9,8 @@ symbol.
 
 Example: `python3 twitter_bot.py @yourhandle`
 
+#### Available Arguments
+
     positional arguments:
       user_handle           your twitter @handle
     
@@ -18,7 +20,7 @@ Example: `python3 twitter_bot.py @yourhandle`
       -l {0,1,2}, --log {0,1,2}
                             change logging level
 
-**Log Levels**
+#### Log Levels
 - 0 : logging is disabled (default)
 - 1 : errors and program arguments are logged
 - 2 : tweets (incoming and outgoing), errors, and program arguments are logged
