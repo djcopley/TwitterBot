@@ -30,7 +30,7 @@ parser = argparse.ArgumentParser(description='A bot that automatically responds 
                                  prog='Twitter Bot')
 parser.add_argument('user_handle', help='your twitter @handle', type=str)
 parser.add_argument('-m', '--mute', help='disables console output of tweets', action='store_true', default=False)
-parser.add_argument('-l', '--log', help='change logging level', type=int, choices=[0, 1, 2])
+parser.add_argument('-l', '--log', help='change logging level', type=int, choices=[0, 1, 2], default=0)
 
 arguments = parser.parse_args()
 
@@ -51,7 +51,6 @@ def strip_user_handles(text):
 
 if __name__ == '__main__':
     try:
-        # Be sure to replace @djrcopley with YOUR twitter handle
         for tweet in api.GetStreamFilter(track=[arguments.user_handle]):
             response = cleverbot.say(strip_user_handles(tweet['text']))
             send_tweet(tweet['user']['screen_name'], response)
