@@ -25,6 +25,9 @@ Example: `python3 twitter_bot.py @yourhandle`
     - 1 : errors and program arguments are logged
     - 2 : tweets (incoming and outgoing), errors, and program arguments are logged
 
+
+***Note**: if the account tweeting you is private, TwitterBot will not reply.*
+
 # Installation
 
 Generate API keys for [Twitter](https://apps.twitter.com) and [CleverBot](https://www.cleverbot.com/api/)

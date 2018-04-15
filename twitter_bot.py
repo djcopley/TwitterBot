@@ -1,10 +1,7 @@
 """
 Code by Daniel Copley
 Source @ GitHub.com/djcopley
-Version 0.1-beta
-
-The goal of version 2.0 is to reply directly to threads where you are mentioned.
-TODO - Setup logging; Reply directly to tweets
+Version 0.1.1-beta
 """
 #!/usr/bin/env python3
 import twitter
@@ -22,9 +19,6 @@ api = twitter.Api(
 )
 
 cleverbot = CleverWrap(api_key=CleverBot.API_KEY)
-
-# TODO Setup logger
-logger = logging.Logger('')
 
 # Argument Parsing
 parser = argparse.ArgumentParser(description='A bot that automatically responds to tweets.',
