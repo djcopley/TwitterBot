@@ -7,7 +7,6 @@ Version 0.1.1-beta
 import twitter
 import re
 import argparse
-import logging
 from cleverwrap import CleverWrap
 from credentials import Twitter, CleverBot
 
