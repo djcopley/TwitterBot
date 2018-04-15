@@ -7,7 +7,7 @@ A simple program that replies to tweets. Response is generated using the CleverB
 TwitterBot requires one positional argument to run, your twitter handle. Make sure to include the '@'
 symbol.
 
-Example: `python3 twitter_bot.py @yourhandle`
+Example: `python3 twitter_bot.py @yourhandle` or `./twitter_bot.py @yourhandle`
 
 ### Program Arguments
 
@@ -22,8 +22,8 @@ Example: `python3 twitter_bot.py @yourhandle`
 
     Logging Levels
     - 0 : logging is disabled (default)
-    - 1 : errors and program arguments are logged
-    - 2 : tweets (incoming and outgoing), errors, and program arguments are logged
+    - 1 : errors and critical failures are logged
+    - 2 : in addition, tweets (incoming and outgoing) are logged
 
 
 ***Note**: if the account tweeting you is private, TwitterBot will not reply.*
