@@ -3,6 +3,8 @@
 Code by Daniel Copley
 Source @ GitHub.com/djcopley
 Version 0.1.2-beta
+
+# TODO - Reply directly to thread
 """
 
 import twitter
