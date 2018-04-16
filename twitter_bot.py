@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.INFO)
 log_level = {0: None, 1: logging.ERROR, 2: logging.INFO}[arguments.log]
 logger = logging.getLogger(__name__)
 
-if log_level:
+if log_level:  # Set up file handler if log level is specified
     logger.setLevel(log_level)
 
     handler = logging.FileHandler('twitter_bot.log')
