@@ -35,7 +35,7 @@ Example: `python3 twitter_bot.py @yourhandle` or `./twitter_bot.py @yourhandle`
 
 Generate API keys for [Twitter](https://apps.twitter.com) and [CleverBot](https://www.cleverbot.com/api/)
 
-Create a credentials.py file and paste in the following (substituting your credentials into the empty fields):
+Find the credentials.py file and paste your credentials into the empty fields:
     
     class Twitter:
         CONSUMER_KEY = ''
