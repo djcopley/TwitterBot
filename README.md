@@ -11,14 +11,17 @@ Example: `python3 twitter_bot.py @yourhandle` or `./twitter_bot.py @yourhandle`
 
 ### Program Arguments
 
+    usage: Twitter Bot [-h] [-r] [-q] [-l {0,1,2}] twitter_handle
+    
     positional arguments:
-      user_handle           your twitter @handle
+      twitter_handle        your twitter @handle
     
     optional arguments:
-      -h, --help            show this help message and exit
-      -m, --mute            disables console output of tweets
-      -l {0,1,2}, --log {0,1,2}
-                            change logging level
+      -h, --help                    show this help message and exit
+      -r, --reply_to_thread         toggles reply to thread where mentioned
+      -q, --quiet                   disables console output of non-errors
+      -l {0,1,2}, --log {0,1,2}     change logging level
+
 
     Logging Levels
     - 0 : logging is disabled (default)
