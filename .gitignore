@@ -2,5 +2,3 @@
 venv/
 *.log
 *.log/
-credentials.py/
-credentials.py
