@@ -2,9 +2,7 @@
 """
 Code by Daniel Copley
 Source @ GitHub.com/djcopley
-Version 0.1.2-beta
-
-# TODO - Reply directly to thread
+Version 1.0
 """
 
 import twitter
@@ -26,33 +24,38 @@ cleverbot = CleverWrap(api_key=CleverBot.API_KEY)
 parser = argparse.ArgumentParser(description='A bot that automatically responds to tweets.',
                                  prog='Twitter Bot')
 parser.add_argument('twitter_handle', help='your twitter @handle', type=str)
+parser.add_argument('-r', '--reply_to_thread', help='toggles reply to thread where mentioned', action='store_true',
+                    default=False)
 parser.add_argument('-q', '--quiet', help='disables console output of non-errors', action='store_true', default=False)
 parser.add_argument('-l', '--log', help='change logging level', type=int, choices=[0, 1, 2], default=0)
 
 arguments = parser.parse_args()
 
 # Logging Setup
-logging.basicConfig(level=logging.INFO)
+log_level = {0: None, 1: logging.ERROR, 2: logging.INFO}[arguments.log]  # File log level
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-log_level = {0: None, 1: logging.ERROR, 2: logging.INFO}[arguments.log]
 logger = logging.getLogger(__name__)
+logger.setLevel(level=logging.DEBUG)
+
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.ERROR if arguments.quiet else logging.INFO)
+console_handler.setFormatter(formatter)
+
+logger.addHandler(console_handler)
 
 if log_level:  # Set up file handler if log level is specified
-    logger.setLevel(log_level)
+    file_handler = logging.FileHandler('twitter_bot.log')
+    file_handler.setLevel(logging.ERROR)
+    file_handler.setFormatter(formatter)
 
-    handler = logging.FileHandler('twitter_bot.log')
-    handler.setLevel(log_level)
-
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    handler.setFormatter(formatter)
-
-    logger.addHandler(handler)
+    logger.addHandler(file_handler)
 
 
-def send_tweet(handle, text):
+def send_tweet(handle, text, tweet_id=None):
     try:
-        logger.debug('send_tweet({}, {})'.format(handle, text))
-        api.PostUpdate('@{} {}'.format(handle, text))
+        logger.debug('send_tweet: id={}, handle={}, text={}'.format(tweet_id, handle, text))
+        api.PostUpdate('@{} {}'.format(handle, text), in_reply_to_status_id=tweet_id)
 
     except Exception:
         logger.error('Failed to send tweet', exc_info=True)
@@ -62,7 +65,7 @@ def strip_user_handles(text):
     """Function strips user handles from incoming tweet"""
     pattern = r'\B@\w+ *'
     result = re.sub(pattern, '', text)
-    logger.debug('strip_user_handles({}) --> {}'.format(text, result))
+    logger.debug('strip_user_handles: input:{}, output:{}'.format(text, result))
     return result
 
 
@@ -71,11 +74,12 @@ if __name__ == '__main__':
     try:
         for tweet in api.GetStreamFilter(track=[str(arguments.twitter_handle)]):
             response = cleverbot.say(strip_user_handles(tweet['text']))
-            send_tweet(tweet['user']['screen_name'], response)
+            send_tweet(tweet['user']['screen_name'], response,
+                       tweet_id=tweet['id'] if arguments.reply_to_thread else None)
 
-            if not arguments.quiet:
-                logger.info('Incoming tweet: {}'.format(tweet))
-                logger.info('Reply: {}'.format(response))
+            logger.debug('Tweet: {}'.format(tweet))
+            logger.info('Incoming tweet from {}: {}'.format(tweet['user']['screen_name'], tweet['text']))
+            logger.info('Reply: {}'.format(response))
 
     except KeyboardInterrupt:
         print('\n~ Quitting ~')
