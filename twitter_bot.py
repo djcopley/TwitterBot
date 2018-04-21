@@ -46,7 +46,7 @@ logger.addHandler(console_handler)
 
 if log_level:  # Set up file handler if log level is specified
     file_handler = logging.FileHandler('twitter_bot.log')
-    file_handler.setLevel(logging.ERROR)
+    file_handler.setLevel(log_level)
     file_handler.setFormatter(formatter)
 
     logger.addHandler(file_handler)
